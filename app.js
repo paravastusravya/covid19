@@ -147,18 +147,19 @@ app.put("/districts/:districtId/", async (request, response) => {
 
 app.get("/states/:stateId/stats/", async (request, response) => {
   const { stateId } = request.params;
-  const getStateStats = `
-    SELECT 
-    SUM(cases),
-    SUM(cured),
-    SUM(active),
-    SUM(deaths)
-    FROM district
-    WHERE state_id = ${stateId};
-    `;
-  const statsData = await db.get(getStateStats);
+  const getStateStatsQuery = `
+    SELECT
+      SUM(cases),
+      SUM(cured),
+      SUM(active),
+      SUM(deaths)
+    FROM
+      district
+    WHERE
+      state_id=${stateId};`;
+  const stats = await db.get(getStateStatsQuery);
   response.send({
-    totalCases: stats[" SUM(cases)"],
+    totalCases: stats["SUM(cases)"],
     totalCured: stats["SUM(cured)"],
     totalActive: stats["SUM(active)"],
     totalDeaths: stats["SUM(deaths)"],
