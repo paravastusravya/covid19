@@ -46,13 +46,11 @@ const convertDistrictDbObjToResponseObj = (dbObject) => {
 };
 
 // GET state details API 1
-app.get("/states/", async (require, response) => {
+app.get("/states/", async (request, response) => {
   const getStates = `
     SELECT * 
     FROM
-    state 
-    ORDER BY 
-    state_id;
+    state ;
     `;
   const statesArray = await db.all(getStates);
   response.send(

@@ -3,15 +3,15 @@ GET http://localhost:3000/states/
 
 ###
 
-GET http://localhost:3000/states/3/
+GET http://localhost:3000/states/3/stats/
 ###
 POST http://localhost:3000/districts/
 ###
-GET http://localhost:3000/districts/322/
+GET http://localhost:3000/districts/2/
 ###
 DELETE http://localhost:3000/districts/5/
 ###
 PUT http://localhost:3000/districts/5/ 
 ###
 
-GET http://localhost:3000/districts/2/details/
+GET http://localhost:3000/districts/5/details
