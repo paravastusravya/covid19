@@ -94,12 +94,14 @@ app.post("/districts/", async (request, response) => {
 //API 4 get district by district_id (GET)
 app.get("/districts/:districtId/", async (request, response) => {
   const { districtId } = request.params;
-  const getDistrict = `
-    SELECT *
-    FROM district
-    WHERE district_id = ${districtId};
-    `;
-  const district = await db.get(getDistrict);
+  const getDistrictsQuery = `
+    SELECT
+      *
+    FROM
+     district
+    WHERE
+      district_id = ${districtId};`;
+  const district = await db.get(getDistrictsQuery);
   response.send(convertDistrictDbObjToResponseObj(district));
 });
 
@@ -161,7 +163,6 @@ app.get("/states/:stateId/stats/", async (request, response) => {
     totalActive: stats["SUM(active)"],
     totalDeaths: stats["SUM(deaths)"],
   });
-  console.log(stats);
 });
 
 //API 8
@@ -173,8 +174,6 @@ app.get("/districts/:districtId/details/", async (request, response) => {
     WHERE district_id = ${districtId};
     `;
   const stateNames = await db.get(getStateName);
-  response.send(
-    stateNames.map((eachState) => ({ stateName: eachState.state_name }))
-  );
+  response.send({ stateName: stateNames.state_name });
 });
 module.exports = app;
